@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.qiming</groupId>
+    <artifactId>powerjob-server-run</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <springboot.version>2.7.18</springboot.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <powerjob.server.starter>5.1.0</powerjob.server.starter>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <lombok.version>1.18.12</lombok.version>
+    </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/tech.powerjob/powerjob-server-starter -->
+        <dependency>
+            <groupId>tech.powerjob</groupId>
+            <artifactId>powerjob-server-starter</artifactId>
+            <version>${powerjob.server.starter}</version>
+        </dependency>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- SpringBoot maven plugin -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${springboot.version}</version>
+                <configuration>
+                    <mainClass>tech.powerjob.server.PowerJobServerApplication</mainClass>
+                    <!-- 支持 server 作为 jar 包被外部系统集成 https://gitee.com/KFCFans/PowerJob/issues/I6H8JF ，短期内为了兼容 CI 流程 deploy 阶段关闭注释，推 master 重新打开-->
+                    <!-- <classifier>exec</classifier>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-info</goal>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
